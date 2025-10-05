@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invito: Compleanno con Delitto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        body {
+            background-color: #0a1412;
+            color: #e0dcd1;
+            font-family: 'Lato', sans-serif;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, blockquote {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Colore oro usato in tutto l'invito */
+        .gold-text {
+            color: #E6C300;
+            text-shadow: 0px 0px 8px rgba(230, 195, 0, 0.5);
+        }
+        /* Stili per le sezioni con immagine di sfondo fissa */
+        .bg-fixed-full {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 0;
+            position: relative;
+        }
+        /* Stile pannello "glass" per il contenuto leggibile */
+        .glass-panel {
+            background-color: rgba(10, 20, 18, 0.75);
+            backdrop-filter: blur(5px);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(230, 195, 0, 0.2);
+        }
+        /* Stile pulsanti Gemini */
+        .gemini-button {
+            transition: all 0.3s ease;
+            background-image: linear-gradient(180deg, #FFD700 0%, #E6C300 100%);
+            color: #0a1412 !important;
+        }
+        .gemini-button:hover {
+            box-shadow: 0 0 20px rgba(230, 195, 0, 0.8);
+            transform: translateY(-2px);
+        }
+        /* Stile loader */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #E6C300;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Stile tab attiva */
+        .active-tab {
+            border-bottom: 3px solid #E6C300;
+            color: #E6C300;
+        }
+        /* Garantisce che il contenuto Lui sia assoluto dall'inizio per prevenire CLS */
+        #content-lui {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* --- IMMAGINI SFONDO (Percorsi Relativi - TUTTE LE IMMAGINI DEVONO ESSERE CARICATE) --- */
+        /* I percorsi sono relativi ai file caricati: copertina.jpg, sfondo.jpg, arte.jpg */
+        #slide-copertina {
+            background-image: url('copertina.jpg'); 
+        }
+        #slide-invito, #slide-codice, #slide-ispirazione {
+            background-image: url('sfondo.jpg'); 
+        }
+        #slide-ambientazione {
+            background-image: url('sfondo.jpg');
+        }
+        #slide-ambientazione-dettagli, #slide-finale {
+            background-image: url('arte.jpg'); 
+        }
+
+        /* Media Queries per un layout responsivo */
+        @media (max-width: 768px) {
+            .glass-panel {
+                padding: 1.5rem;
+            }
+            .slide {
+                padding: 2rem 0;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header Fisso e Navigazione -->
+    <header id="header" class="bg-black bg-opacity-80 backdrop-blur-md p-4 fixed w-full top-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto flex justify-center items-center space-x-4 md:space-x-8">
+            <a href="#slide-copertina" class="text-sm md:text-base uppercase tracking-widest hover:gold-text transition duration-300">L'Invito</a>
+            <a href="#slide-ambientazione" class="text-sm md:text-base uppercase tracking-widest hover:gold-text transition duration-300">Atmosfera</a>
+            <a href="#slide-codice" class="text-sm md:text-base uppercase tracking-widest hover:gold-text transition duration-300">DRESSCODE</a>
+            <a href="#slide-finale" class="text-sm md:text-base uppercase tracking-widest hover:gold-text transition duration-300">LA DIVINA DICE...</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Slide 1: Copertina -->
+        <section id="slide-copertina" class="slide h-screen w-full bg-fixed-full">
+            <!-- L'immagine di copertina è impostata come sfondo -->
+        </section>
+
+        <!-- Slide 2: Introduzione -->
+        <section id="slide-invito" class="slide bg-fixed-full">
+            <div class="container mx-auto px-6 text-center max-w-4xl glass-panel p-10 md:p-16">
+                <h2 class="text-3xl md:text-5xl font-bold gold-text mb-8">Carissimo Ospite,</h2>
+                <div class="text-lg md:text-xl leading-relaxed space-y-6 text-gray-200">
+                    <p>Sei formalmente invitato a una serata dove l'eleganza incontra il mistero, e il mormorio del mare fa da sfondo a un oscuro segreto.</p>
+                    <p>Il <strong>25 Ottobre</strong>, non celebreremo un semplice compleanno, ma ci tufferemo in un'epoca di sublime decadenza per una serata indimenticabile.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- La sezione RSVP è stata rimossa qui. -->
+
+        <!-- Slide 3: Atmosfera - Il Cuore della Balansa -->
+        <section id="slide-ambientazione" class="slide bg-fixed-full">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <!-- Immagine Ambientazione (a sinistra) -->
+                    <div class="flex justify-center">
+                        <!-- Fallback con placeholder in caso di mancato caricamento -->
+                        <img src="mood_decadentismo.jpg" alt="Ambientazione decadente, sala con vista mare e palafitte" class="rounded-lg shadow-2xl w-full max-w-md border-4 border-yellow-500 border-opacity-30"
+                             onerror="this.onerror=null; this.src='https://placehold.co/400x500/0a1412/e6c300?text=AMBIENTAZIONE'">
+                    </div>
+                    <!-- Testo (a destra) -->
+                    <div class="glass-panel p-8 md:p-10">
+                        <h3 class="text-3xl md:text-4xl font-bold gold-text mb-4">Atmosfera</h3>
+                        <p class="text-2xl md:text-3xl italic text-white mb-6">Il Sussurro del Mare d'Inverno</p>
+                        <p class="text-base md:text-lg leading-loose text-gray-200">La nostra serata prende vita in una notte cupa e nebbiosa. Il vento sferza la diga e le onde si infrangono contro le palafitte di un'antica <strong>balansa</strong>, un'imponente macchina da pesca sospesa sul mare, isolata e scricchiolante.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Dettagli sull'Ambientazione -->
+        <section id="slide-ambientazione-dettagli" class="slide bg-fixed-full">
+            <div class="absolute inset-0 bg-black bg-opacity-70"></div>
+            <div class="container mx-auto px-6 max-w-5xl relative z-10">
+                <div class="glass-panel p-8 md:p-12 text-center">
+                    <div class="text-lg md:text-xl leading-relaxed space-y-6 text-gray-200">
+                        <p>Legni consunti dal sale, reti da pesca, luci soffuse di candele, e il lusso decadente di un'epoca che amava la bellezza anche nella malinconia. L'arte, la natura e il mistero si fondono, creando un'atmosfera unica e irripetibile, un vero e proprio quadro vivente ispirato al sentire dell'epoca.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: DRESSCODE - Slider Look + Accessori -->
+        <section id="slide-codice" class="slide bg-fixed-full">
+            <div class="container mx-auto px-6 max-w-6xl glass-panel p-8 md:p-12">
+                <h2 class="text-3xl md:text-5xl font-bold gold-text text-center mb-10">DRESSCODE</h2>
+                <p class="text-center text-xl italic mb-10 text-gray-300">Decadentismo Contemporaneo</p>
+
+                <!-- Tab Controls -->
+                <div class="flex justify-center border-b border-gray-600 mb-10">
+                    <button id="tab-lei" class="py-2 px-6 text-lg uppercase tracking-widest transition duration-300 active-tab">Per Lei</button>
+                    <button id="tab-lui" class="py-2 px-6 text-lg uppercase tracking-widest transition duration-300">Per Lui</button>
+                </div>
+
+                <div id="content-slider" class="relative overflow-hidden min-h-[500px]">
+                    <!-- Contenuto Per Lei -->
+                    <div id="content-lei" class="transition-opacity duration-1000">
+                        <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                            <!-- Fallback con placeholder in caso di mancato caricamento -->
+                            <img src="a_touch_of_lei.jpg" alt="Suggerimenti di abbigliamento per lei" class="rounded-lg shadow-xl w-full border-4 border-yellow-500 border-opacity-30"
+                                 onerror="this.onerror=null; this.src='https://placehold.co/400x500/0a1412/e6c300?text=LOOK+LEI'">
+                            <div>
+                                <h3 class="text-2xl gold-text mb-4">Ispirazione Decadente</h3>
+                                <p class="text-lg leading-relaxed text-gray-300">Pensa a pantaloni a palazzo in seta, completi in velluto, abiti sottoveste abbinati a blazer strutturati. I colori ideali sono il verde bosco, il bordeaux, il blu notte e il nero, magari impreziositi da stampe floreali scure o dettagli ricercati. Un accessorio d'impatto, come un gioiello vintage o un dettaglio in pizzo, completerà il look.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contenuto Per Lui (Inizialmente nascosto) -->
+                    <div id="content-lui" class="opacity-0 transition-opacity duration-1000 pointer-events-none">
+                        <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                            <!-- Fallback con placeholder in caso di mancato caricamento -->
+                            <img src="a_touch_of_lui.jpg" alt="Suggerimenti di abbigliamento per lui" class="rounded-lg shadow-xl w-full border-4 border-yellow-500 border-opacity-30"
+                                 onerror="this.onerror=null; this.src='https://placehold.co/400x500/0a1412/e6c300?text=LOOK+LUI'">
+                            <div>
+                                <h3 class="text-2xl gold-text mb-4">Ispirazione Dandy</h3>
+                                <p class="text-lg leading-relaxed text-gray-300">L'eleganza si esprime attraverso la cura dei dettagli e la scelta dei materiali. Opta per un blazer in velluto, un dolcevita scuro sotto un abito ben tagliato, o pantaloni sartoriali abbinati a una camicia di pregio. Gioca con texture come il tweed o il velluto a coste e privilegia tonalità come il grigio fumo, il marrone, il blu e il nero.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Generatore di Accessori Gemini -->
+                <div class="mt-10 pt-6 border-t border-yellow-500 border-opacity-30">
+                    <p class="text-base text-gray-400 mb-4 text-center">Inserisci un capo d'abbigliamento o un colore (es: 'velluto bordeaux') per ricevere idee di accessori in stile decadente.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-xl mx-auto">
+                        <input type="text" id="accessory-input" placeholder="Es: velluto bordeaux..." class="w-full sm:w-auto flex-grow bg-gray-800 text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                        <button id="accessory-button" class="gemini-button w-full sm:w-auto font-bold py-3 px-8 rounded-lg uppercase tracking-wider text-sm md:text-base">
+                            Suggerisci Accessori
+                        </button>
+                    </div>
+
+                    <div id="accessory-loader" class="mx-auto my-6 hidden">
+                        <div class="loader"></div>
+                    </div>
+
+                    <div id="accessory-result" class="mt-6 p-6 bg-gray-900 bg-opacity-80 rounded-lg text-left hidden">
+                        <p class="text-sm md:text-base whitespace-pre-wrap text-gray-300"></p>
+                    </div>
+                    <div id="accessory-error" class="mt-4 p-3 bg-red-900 text-white rounded-lg hidden text-sm">
+                        <!-- Messaggio di errore più specifico per l'utente -->
+                        <p>La musa della moda è distratta. Verifica la connessione o riprova tra qualche istante.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: La Citazione (Ispirazione) -->
+        <section id="slide-ispirazione" class="slide bg-fixed-full">
+            <div class="container mx-auto px-6 max-w-4xl glass-panel p-10 md:p-16 text-center">
+                <blockquote class="text-3xl md:text-5xl italic leading-snug my-8 text-white">
+                    "Bisogna fare della propria vita come si fa un'opera d'arte."
+                </blockquote>
+                <p class="text-xl gold-text tracking-wider mt-4 mb-12">Gabriele D'Annunzio</p>
+            </div>
+        </section>
+
+        <!-- Slide 7: Generatore di Poesie -->
+        <section id="slide-finale" class="slide bg-fixed-full">
+            <div class="absolute inset-0 bg-black bg-opacity-70"></div>
+            <div class="container mx-auto px-6 max-w-xl relative z-10 glass-panel p-8 md:p-12 text-center">
+                <p class="text-xl text-gray-300 mb-10">Per una notte, la tua vita sarà un'opera d'arte tinta di mistero. Preparati a una serata fuori dall'ordinario.</p>
+
+                <div class="border-t border-yellow-500 w-24 mx-auto my-10 opacity-50"></div>
+
+                <p class="text-lg text-gray-400 mb-6">Lascia che <strong>la Divina</strong> ti ispiri. Inserisci una parola e ricevi una poesia.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-lg mx-auto">
+                    <input type="text" id="poem-input" placeholder="Es: mare, mistero, ossessione..." class="w-full sm:w-auto flex-grow bg-gray-800 text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                    <button id="poem-button" class="gemini-button w-full sm:w-auto font-bold py-3 px-8 rounded-lg uppercase tracking-wider text-sm md:text-base">
+                        Genera Poesia
+                    </button>
+                </div>
+
+                <div id="poem-loader" class="mx-auto my-6 hidden">
+                    <div class="loader"></div>
+                </div>
+                <div id="poem-result" class="mt-6 p-6 bg-gray-900 bg-opacity-80 rounded-lg text-center hidden">
+                    <p class="text-lg whitespace-pre-wrap italic text-gray-300"></p>
+                </div>
+                <div id="poem-error" class="mt-4 p-3 bg-red-900 text-white rounded-lg hidden text-sm">
+                    <!-- Messaggio di errore più specifico per l'utente -->
+                    <p>La musa è distratta. Verifica la connessione o riprova tra qualche istante.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-6 bg-black text-gray-500 text-sm border-t border-gray-800">
+        <p class="uppercase">OCT, 25 &nbsp;&nbsp;&nbsp;&nbsp; COMPLEANNO CON DELITTO &nbsp;&nbsp;&nbsp;&nbsp; INDIGA, CHIOGGIA (VE)</p>
+    </footer>
+
+    <script>
+        // Variabili Globali
+        // La chiave API è gestita dall'ambiente, lasciamo vuota
+        const apiKey = ""; 
+        // L'URL API corretto per la generazione di contenuti
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent`;
+
+        // --- Funzioni di Utilità Generali ---
+
+        // Funzione per la gestione delle chiamate API con exponential backoff
+        async function callGeminiAPI(prompt, systemInstruction, loader, resultContainer, errorContainer, button) {
+            loader.classList.remove('hidden');
+            resultContainer.classList.add('hidden');
+            errorContainer.classList.add('hidden');
+            button.disabled = true;
+
+            try {
+                const payload = { 
+                    contents: [{ parts: [{ text: prompt }] }],
+                    systemInstruction: { parts: [{ text: systemInstruction }] }
+                };
+                let response;
+                let backoff = 1000;
+                
+                // Tenta 5 volte con backoff esponenziale
+                for (let i = 0; i < 5; i++) {
+                    // Costruiamo l'URL con la chiave API (se disponibile)
+                    const fetchUrl = apiKey ? `${apiUrl}?key=${apiKey}` : apiUrl;
+
+                    response = await fetch(fetchUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (response.ok) break;
+                    
+                    // Aspetta prima di riprovare
+                    await new Promise(resolve => setTimeout(resolve, backoff));
+                    backoff *= 2;
+                }
+
+                if (!response.ok) {
+                    // Se tutti i tentativi falliscono
+                    const errorText = await response.text();
+                    console.error("API Error Response:", errorText);
+                    throw new Error('API response was not ok after multiple retries.');
+                }
+
+                const result = await response.json();
+                const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                if (text) {
+                    resultContainer.querySelector('p').textContent = text.trim();
+                    resultContainer.classList.remove('hidden');
+                } else {
+                    throw new Error('No content received from API or unexpected response structure.');
+                }
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                errorContainer.classList.remove('hidden');
+            } finally {
+                loader.classList.add('hidden');
+                button.disabled = false;
+            }
+        }
+
+        // --- Logica Header (Nascondi/Mostra allo scroll) ---
+        let lastScrollTop = 0;
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scorrendo in basso, nasconde l'header
+                header.style.top = `-${header.offsetHeight + 10}px`;
+            } else {
+                // Scorrendo in alto, mostra l'header
+                header.style.top = '0';
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        });
+
+
+        // --- Logica Slider Codice d'Abbigliamento (Slide 5) ---
+        const tabLei = document.getElementById('tab-lei');
+        const tabLui = document.getElementById('tab-lui');
+        const contentLei = document.getElementById('content-lei');
+        const contentLui = document.getElementById('content-lui');
+        const sliderContainer = document.getElementById('content-slider');
+
+        // Imposta l'altezza dinamica dello slider per prevenire CLS durante il cambio tab
+        function setSliderHeight(contentElement) {
+            if (contentElement.offsetHeight > 0) {
+                 sliderContainer.style.minHeight = `${contentElement.offsetHeight}px`;
+            }
+        }
+
+        function showTab(tabToShow, tabToHide, contentToShow, contentToHide) {
+            // Aggiorna classi tab
+            tabToShow.classList.add('active-tab');
+            tabToHide.classList.remove('active-tab');
+            
+            // Nasconde il contenuto vecchio
+            contentToHide.classList.add('opacity-0');
+            contentToHide.classList.add('pointer-events-none');
+            
+            // Mostra il contenuto nuovo dopo la transizione parziale
+            setTimeout(() => {
+                contentToShow.classList.remove('opacity-0');
+                contentToShow.classList.remove('pointer-events-none');
+                
+                // Mantiene il contenuto nuovo in posizione relativa e il vecchio in assoluto
+                contentToShow.style.position = 'relative';
+                contentToHide.style.position = 'absolute';
+
+                // Aggiusta l'altezza del container per il nuovo contenuto
+                setSliderHeight(contentToShow);
+
+            }, 500); // 500ms (metà della durata della transizione CSS)
+
+            // Posiziona il contenuto che scompare in assoluto immediatamente per facilitare il posizionamento del nuovo
+            contentToHide.style.position = 'absolute';
+            contentToShow.style.position = 'absolute'; // Mantenuto assoluto fino a quando non è visibile
+        }
+
+        tabLei.addEventListener('click', () => {
+            showTab(tabLei, tabLui, contentLei, contentLui);
+        });
+
+        tabLui.addEventListener('click', () => {
+            showTab(tabLui, tabLei, contentLui, contentLei);
+        });
+
+        // Inizializzazione: Assicura l'altezza corretta e lo stato iniziale
+        window.addEventListener('load', () => {
+            // Assicurati che l'altezza iniziale sia impostata per Lei
+            setSliderHeight(contentLei); 
+        });
+
+        // --- Logica Gemini - 1: Generatore di Accessori (Slide 5) ---
+        const accessoryButton = document.getElementById('accessory-button');
+        const accessoryInput = document.getElementById('accessory-input');
+        const accessoryLoader = document.getElementById('accessory-loader');
+        const accessoryResult = document.getElementById('accessory-result');
+        const accessoryError = document.getElementById('accessory-error');
+
+        const accessorySystemInstruction = "Agisci come uno stilista d'alta moda del Decadentismo. Il tuo compito è suggerire 4 accessori unici, lussuosi e perfetti per un look ispirato al Decadentismo Contemporaneo e al mistero. Formatta la risposta come un elenco puntato (es: - Un anello di opale...), senza introduzioni o conclusioni, e assicurati che gli accessori siano raffinati, sensuali e coerenti con il tema.";
+
+        accessoryButton.addEventListener('click', () => {
+            const topic = accessoryInput.value || "velluto nero";
+            const prompt = `Suggerisci accessori per il seguente capo/colore: "${topic}".`;
+            callGeminiAPI(prompt, accessorySystemInstruction, accessoryLoader, accessoryResult, accessoryError, accessoryButton);
+        });
+
+        // --- Logica Gemini - 2: Generatore di Poesie Decadenti (Slide 7) ---
+        const poemButton = document.getElementById('poem-button');
+        const poemInput = document.getElementById('poem-input');
+        const poemLoader = document.getElementById('poem-loader');
+        const poemResult = document.getElementById('poem-result');
+        const poemError = document.getElementById('poem-error');
+
+        const poemSystemInstruction = "Agisci come un poeta emulo di Gabriele D'Annunzio. Scrivi una breve poesia di 4-6 versi in italiano in stile decadente. Usa un linguaggio evocativo, sensuale e malinconico. Non includere un titolo e non aggiungere introduzioni o conclusioni.";
+
+        poemButton.addEventListener('click', () => {
+            const topic = poemInput.value || "il mistero della diga";
+            const prompt = `Scrivi una poesia sul tema di: "${topic}".`;
+            callGeminiAPI(prompt, poemSystemInstruction, poemLoader, poemResult, poemError, poemButton);
+        });
+
+    </script>
+</body>
+</html>
