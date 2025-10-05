@@ -32,6 +32,14 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
+        /* Fix per iOS - aggiungi alla fine del tuo CSS */
+@media screen and (max-width: 768px) {
+    .bg-fixed-full {
+        background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center !important;
+    }
+}
         .slide {
             min-height: 100vh;
             display: flex;
@@ -455,6 +463,7 @@
     </script>
 </body>
 </html>
+
 
 
 
