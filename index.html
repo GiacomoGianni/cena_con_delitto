@@ -116,6 +116,9 @@
             .slide {
                 padding: 2rem 0;
             }
+            nav a {
+                font-size: 0.775rem !important;
+            }
         }
     </style>
 </head>
@@ -297,7 +300,7 @@
         // La chiave API è gestita dall'ambiente, lasciamo vuota
         const apiKey = "AIzaSyCRrp-nO7cJbIT_TRXL7G6qsJZLrkLhM2U";
         // L'URL API corretto per la generazione di contenuti
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent`;
+        const apiUrl = "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent";
 
         // --- Funzioni di Utilità Generali ---
 
@@ -309,9 +312,11 @@
             button.disabled = true;
 
             try {
-                const payload = { 
-                    contents: [{ parts: [{ text: prompt }] }],
-                    systemInstruction: { parts: [{ text: systemInstruction }] }
+                const payload = {
+                    contents: [{
+                        role: "user",
+                        parts: [{ text: `${systemInstruction}\n\n${prompt}` }]
+                    }]
                 };
                 let response;
                 let backoff = 1000;
